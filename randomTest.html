@@ -1,0 +1,16 @@
+function randomTest(n,m) {
+    var arr = [];
+    for (var i = 0 ; i < n;i++){
+        arr.push(Math.floor(Math.random()*m));
+    }
+    var tjArr = {};
+    arr.forEach(function (v) {
+        if (!tjArr[v]){
+            tjArr[v] = 1;
+        }else {
+            tjArr[v] += 1;
+        }
+    });
+    return tjArr;
+}
+console.log(randomTest(1000000,2));

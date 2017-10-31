@@ -1,0 +1,36 @@
+var dom = {
+    'tag': 'div',
+    'content': 'd',
+    'prop': {'class':'test'},
+    'children': [
+        {'tag': 'p','content': 'children 1'},
+        {'tag': 'p','content': 'children 2'},
+        {'tag': 'p','class': 'children3','children':[
+            {'tag': 'a','content':'Á´½Ó'},
+            {'tag': 'span','class':'span','content':'span'}
+        ]}
+    ]
+};
+var render = function(domTree) {
+    var el = document.createElement(domTree.tag);
+    for(var key in domTree.prop){
+        if (domTree.prop.hasOwnProperty(key)){
+            el.setAttribute(key,domTree.prop[key]);
+        }
+    }
+    if (!!domTree.content) {
+        var text = document.createTextNode(domTree.content);
+        el.appendChild(text);
+    }
+    if (!!domTree.children) {
+        domTree.children.forEach(function (v) {
+            var childEL = render(v);
+            if (!!v.content) {
+                childEL.innerText = (v.content);
+            }
+            el.appendChild(childEL);
+        })
+    }
+    return el;
+};
+console.log(render(dom));
