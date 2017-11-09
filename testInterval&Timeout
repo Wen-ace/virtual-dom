@@ -1,0 +1,31 @@
+<script>
+
+    var i = j = 0;
+    var times = 10000;
+    var time = new Date().getTime();
+    function setI() {
+        var timerId = setInterval(function () {
+            i++;
+            if (i > times) {
+                console.log( "IntervalTime === > " + (new Date().getTime() - time));
+                clearInterval(timerId);
+            }
+        },20);
+    }
+    function setT() {
+        setTimeout(function () {
+            j++;
+            if (j > times) {
+                console.log( "TimeoutTime ==== > " + (new Date().getTime() - time));
+            }else {
+                setT();
+            }
+        },20)
+    }
+    setT();
+    setI();
+    /**
+     * IntervalTime === > 219017
+     * TimeoutTime ==== > 228799
+     * */
+</script>
